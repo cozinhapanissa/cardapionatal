@@ -1,0 +1,194 @@
+  :root {
+    --creme: #f8efe2;
+    --creme-escuro: #f1e4d0;
+    --marrom: #5a3a1a;
+    --marrom-claro: #7a5a36;
+    --vermelho: #9b1c1c;
+    --vermelho-escuro: #6f1111;
+    --dourado: #b8863b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--creme-escuro);
+    color: var(--marrom);
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.35;
+    min-height: 100vh;
+  }
+
+  /* ---------- ABERTURA: cortina que abre e já revela o cardápio ---------- */
+  .abertura {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  body.carregando { overflow: hidden; }
+
+  .cortina {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,0.22) 0, rgba(0,0,0,0) 14px,
+        rgba(255,255,255,0.08) 28px, rgba(0,0,0,0.22) 44px),
+      var(--vermelho);
+    box-shadow: 0 0 40px rgba(0,0,0,0.45);
+  }
+  .cortina { transition: transform 1s cubic-bezier(.7,0,.3,1); }
+  .cortina.esq { left: 0;  border-right: 3px solid var(--dourado); }
+  .cortina.dir { right: 0; border-left: 3px solid var(--dourado); }
+  .abrir .cortina.esq { transform: translateX(-130%); }
+  .abrir .cortina.dir { transform: translateX(130%); }
+
+  /* ---------- PÁGINA ---------- */
+  main {
+    padding: 24px 14px 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cardapio {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    background: var(--creme);
+    border: 1px solid var(--marrom);
+    padding: 70px 28px 36px;
+    box-shadow: 0 10px 40px rgba(90,58,26,0.18);
+  }
+  .cardapio::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(90,58,26,0.35);
+    pointer-events: none;
+  }
+
+  .deco { position: absolute; pointer-events: none; }
+  .deco svg { display: block; width: 100%; height: auto; }
+  .ramo-topo   { top: 14px; left: 14px; width: 120px; }
+  .bola        { top: 8px; right: 22px; width: 64px; }
+  .ramo-base-e { bottom: 14px; left: 14px; width: 90px; transform: scaleY(-1); }
+  .ramo-base-d { bottom: 14px; right: 14px; width: 90px; transform: scale(-1, -1); }
+
+  .estrela {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin: 8px auto 18px; color: var(--dourado);
+  }
+  .estrela::before, .estrela::after {
+    content: ""; height: 1px; width: 44px; background: var(--dourado);
+  }
+
+  .marca {
+    text-align: center;
+    letter-spacing: 0.28em;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  h1 { text-align: center; font-weight: 500; line-height: 1; margin-top: 18px; }
+  h1 .pequeno {
+    display: block;
+    font-size: 2.3rem;
+    letter-spacing: 0.04em;
+    color: var(--marrom);
+  }
+  h1 .grande {
+    display: block;
+    font-size: 5.6rem;
+    font-weight: 600;
+    color: var(--vermelho);
+    letter-spacing: 0.01em;
+    margin-top: -4px;
+  }
+
+  .azevinho { width: 150px; margin: 6px auto 34px; display: flex; align-items: center; gap: 8px; }
+  .azevinho::before, .azevinho::after { content: ""; flex: 1; height: 1px; background: var(--marrom); }
+  .azevinho svg { width: 54px; flex: none; }
+
+  h2 {
+    display: flex; align-items: center; gap: 14px;
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--marrom-claro); }
+
+  .preco { white-space: nowrap; }  /* o preço nunca quebra no meio */
+
+  ul { list-style: none; margin-bottom: 8px; }
+  li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 11px;
+  }
+  li::before {
+    content: "";
+    position: absolute; left: 6px; top: 0.62em;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--marrom);
+  }
+
+  hr { border: 0; border-top: 1px solid var(--marrom-claro); margin: 26px 0 26px; }
+
+  .assinatura {
+    display: flex; align-items: center; gap: 14px;
+    margin: 34px 0 0;
+  }
+  .assinatura::before, .assinatura::after { content: ""; flex: 1; height: 1px; background: var(--marrom-claro); }
+  .assinatura span { font-family: "Pinyon Script", cursive; font-size: 2.2rem; color: var(--marrom); }
+
+  .pedido { text-align: center; margin: 34px 0 70px; }
+  .botao {
+    display: inline-block;
+    background: var(--vermelho);
+    color: var(--creme);
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border: 1px solid var(--vermelho-escuro);
+    outline: 1px solid var(--dourado);
+    outline-offset: 3px;
+    transition: background .25s, transform .25s;
+  }
+  .botao:hover, .botao:focus-visible { background: var(--vermelho-escuro); transform: translateY(-2px); }
+
+  @media (max-width: 420px) {
+    body { font-size: 17.5px; }
+    .cardapio { padding: 64px 20px 30px; }
+    h1 .grande { font-size: 4.6rem; }
+    h1 .pequeno { font-size: 1.9rem; }
+    h2 { font-size: 1.35rem; }
+    .ramo-topo { width: 96px; }
+    .bola { width: 52px; right: 16px; }
+  }
+
+  /* celulares bem pequenos (iPhone SE, Galaxy A pequeno) */
+  @media (max-width: 360px) {
+    main { padding: 16px 10px 40px; }
+    .cardapio { padding: 58px 16px 28px; }
+    h1 .grande { font-size: 4rem; }
+    h1 .pequeno { font-size: 1.7rem; }
+    h2 { font-size: 1.1rem; letter-spacing: 0.08em; gap: 10px; white-space: nowrap; }
+    .marca { letter-spacing: 0.2em; font-size: 0.95rem; }
+    .assinatura span { font-size: 1.8rem; white-space: nowrap; }
+    .assinatura { gap: 10px; }
+    .botao { padding: 14px 26px; font-size: 1.05rem; letter-spacing: 0.12em; }
+    .ramo-topo { width: 80px; }
+    .bola { width: 46px; right: 14px; }
+    .ramo-base-e, .ramo-base-d { width: 70px; }
+  }
